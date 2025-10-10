@@ -102,12 +102,29 @@ class _MyHomePageState extends State<MyHomePage> {
           // TRY THIS: Invoke "debug painting" (choose the "Toggle Debug Paint"
           // action in the IDE, or press "p" in the console), to see the
           // wireframe for each widget.
+
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
+            Text(
+              'Welcome to my shop!',
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 36,
+                fontWeight: FontWeight.bold,
+                color: Color.fromARGB(255, 98, 27, 145), // purple
+                letterSpacing: 0.3,
+              ),
+            ),
+            const SizedBox(height: 16),
             const Text('You have pushed the button this many times:'),
+            const SizedBox(height: 8),
             Text(
               '$_counter',
-              style: Theme.of(context).textTheme.headlineMedium,
+              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
+                    fontSize: 40,
+                    fontWeight: FontWeight.w700,
+                    color: Theme.of(context).colorScheme.primary,
+                  ),
             ),
           ],
         ),
@@ -120,3 +137,4 @@ class _MyHomePageState extends State<MyHomePage> {
     );
   }
 }
+
