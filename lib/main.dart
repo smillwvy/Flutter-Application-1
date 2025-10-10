@@ -111,7 +111,7 @@ class _MyHomePageState extends State<MyHomePage> {
               style: TextStyle(
                 fontSize: 36,
                 fontWeight: FontWeight.bold,
-                color: Color.fromARGB(255, 98, 27, 145), // purple
+                color: Color.fromARGB(255, 98, 27, 145),
                 letterSpacing: 0.3,
               ),
             ),
