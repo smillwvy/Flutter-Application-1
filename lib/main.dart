@@ -189,14 +189,14 @@ class OrderItemDisplay extends StatelessWidget {
 @override
   Widget build(BuildContext context) {
     return Container(
-      color: const Color.fromARGB(255, 125, 197, 255),
+      color: const Color.fromARGB(255, 129, 198, 255),
       padding: const EdgeInsets.symmetric(vertical: 7, horizontal: 3),
       child: Text(
         '$quantity $itemType sandwich(es): ${'🥪' * quantity}',
         style: const TextStyle(
-          color: Color.fromARGB(255, 0, 0, 0),
+          color: Color.fromARGB(255, 252, 255, 68),
           fontSize: 20,
-          fontWeight: FontWeight.w600,
+          fontWeight: FontWeight.bold,
         ),
       ),
     );
