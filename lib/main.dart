@@ -14,7 +14,7 @@ Widget build(BuildContext context) {
     home: Scaffold(
       appBar: AppBar(title: const Text('Sandwich Counter')),
       body: const Center(
-        child: OrderItemDisplay(5, 'Footlong'),
+        child: OrderItemDisplay(5, 'Club'),
       ),
     ),
   );
@@ -176,8 +176,19 @@ class OrderItemDisplay extends StatelessWidget {
 
   const OrderItemDisplay(this.quantity, this.itemType, {super.key});
 
-  @override
-Widget build(BuildContext context) {
-  return Text('$quantity $itemType sandwich(es): ${'🥪' * quantity}');
-}
+@override
+  Widget build(BuildContext context) {
+    return Container(
+      color: const Color.fromARGB(255, 125, 197, 255),
+      padding: const EdgeInsets.symmetric(vertical: 200, horizontal: 100),
+      child: Text(
+        '$quantity $itemType sandwich(es): ${'🥪' * quantity}',
+        style: const TextStyle(
+          color: Color.fromARGB(255, 0, 0, 0),
+          fontSize: 20,
+          fontWeight: FontWeight.w600,
+        ),
+      ),
+    );
+  }
 }
