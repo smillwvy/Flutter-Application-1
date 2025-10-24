@@ -9,6 +9,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'Sandwich Shop App',
+      home: OrderScreen(maxQuantity: 10),
+    );
+  }
+}
+
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Sandwich Shop App',
       home: Scaffold(
@@ -38,7 +47,6 @@ class App extends StatelessWidget {
       ),
     );
   }
-}
 
 class OrderScreen extends StatefulWidget {
   final int maxQuantity;
