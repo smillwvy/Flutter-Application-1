@@ -62,17 +62,32 @@ class OrderScreen extends StatefulWidget {
 class _OrderScreenState extends State<OrderScreen> {
   int _quantity = 0;
 
-void _increaseQuantity() {
-  if (_quantity < widget.maxQuantity) {
-    setState(() => _quantity++);
-  }
-}
+final TextEditingController _noteController = TextEditingController();
+  String _lastNote = '';
 
-void _decreaseQuantity() {
-  if (_quantity > 0) {
-    setState(() => _quantity--);
+  @override
+  void dispose() {
+    _noteController.dispose();
+    super.dispose();
   }
-}
+  
+void _increaseQuantity() {
+    if (_quantity < widget.maxQuantity) {
+      setState(() {
+        _quantity++;
+        _lastNote = _noteController.text.trim();
+      });
+    }
+  }
+
+  void _decreaseQuantity() {
+    if (_quantity > 0) {
+      setState(() {
+        _quantity--;
+        _lastNote = _noteController.text.trim();
+      });
+    }
+  }
 
   @override
 Widget build(BuildContext context) {
