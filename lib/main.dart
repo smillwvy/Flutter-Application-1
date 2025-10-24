@@ -1,3 +1,5 @@
+// ignore_for_file: unused_field
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,37 +18,37 @@ class App extends StatelessWidget {
   }
 }
 
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Sandwich Shop App',
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Sandwich Counter')),
-        body: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const OrderItemDisplay(5, 'Footlong'),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children:[
-                  ElevatedButton(
-                    onPressed: () => print('Add button pressed!'),
-                    child: const Text('Add'),
-                  ),
-                  const SizedBox(width: 16),// Add spacing between buttons
-                  ElevatedButton(
-                    onPressed: () => print('Remove button pressed!'),
-                    child: const Text('Remove'),
-                  ),
-                ],
-              ),
-            ],
-          ),
+@override
+Widget build(BuildContext context) {
+  return MaterialApp(
+    title: 'Sandwich Shop App',
+    home: Scaffold(
+      appBar: AppBar(title: const Text('Sandwich Counter')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const OrderItemDisplay(5, 'Footlong'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ElevatedButton(
+                  onPressed: () => debugPrint('Add button pressed!'),
+                  child: const Text('Add'),
+                ),
+                const SizedBox(width: 16), // Add spacing between buttons
+                ElevatedButton(
+                  onPressed: () => debugPrint('Remove button pressed!'),
+                  child: const Text('Remove'),
+                ),
+              ],
+            ),
+          ],
         ),
       ),
-    );
-  }
+    ),
+  );
+}
 
 class OrderScreen extends StatefulWidget {
   final int maxQuantity;
@@ -62,7 +64,7 @@ class OrderScreen extends StatefulWidget {
 class _OrderScreenState extends State<OrderScreen> {
   int _quantity = 0;
 
-final TextEditingController _noteController = TextEditingController();
+  final TextEditingController _noteController = TextEditingController();
   String _lastNote = '';
 
   @override
@@ -70,8 +72,8 @@ final TextEditingController _noteController = TextEditingController();
     _noteController.dispose();
     super.dispose();
   }
-  
-void _increaseQuantity() {
+
+  void _increaseQuantity() {
     if (_quantity < widget.maxQuantity) {
       setState(() {
         _quantity++;
@@ -90,38 +92,47 @@ void _increaseQuantity() {
   }
 
   @override
-Widget build(BuildContext context) {
-  return Scaffold(
-    appBar: AppBar(
-      title: const Text('Sandwich Counter'),
-    ),
-    body: Center(
-      child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          OrderItemDisplay(
-            _quantity,
-            'Footlong',
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              ElevatedButton(
-                onPressed: _increaseQuantity,
-                child: const Text('Add'),
-              ),
-              ElevatedButton(
-                onPressed: _decreaseQuantity,
-                child: const Text('Remove'),
-              ),
-            ],
-          ),
-        ],
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(title: const Text('Sandwich Counter')),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            OrderItemDisplay(_quantity, 'Footlong'),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SizedBox(
+                  child: ElevatedButton(
+                    // Disable Add when at max quantity
+                    onPressed: _quantity >= widget.maxQuantity ? null : _increaseQuantity,
+                    style: ElevatedButton.styleFrom(
+                       backgroundColor: Colors.red,
+                       foregroundColor: Colors.white,
+                     ),
+                     child: const Text('Add'),
+                  ),
+                ),
+                SizedBox(
+                  child: ElevatedButton(
+                    // Disable Remove when at zero
+                    onPressed: _quantity <= 0 ? null : _decreaseQuantity,
+                    style: ElevatedButton.styleFrom(
+                       backgroundColor: Colors.red,
+                       foregroundColor: Colors.white,
+                     ),
+                    child: const Text('Remove'),
+                  ),
+                ),
+              ],
+            ),
+          ],
+        ),
       ),
-    ),
-  );
+    );
+  }
 }
-} 
 
 class OrderItemDisplay extends StatelessWidget {
   final int quantity;
