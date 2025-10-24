@@ -20,12 +20,12 @@ class App extends StatelessWidget {
               const OrderItemDisplay(5, 'Footlong'),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
-                children: [
+                children:[
                   ElevatedButton(
                     onPressed: () => print('Add button pressed!'),
                     child: const Text('Add'),
                   ),
-                  const SizedBox(width: 16),  // Add spacing between buttons
+                  const SizedBox(width: 16),// Add spacing between buttons
                   ElevatedButton(
                     onPressed: () => print('Remove button pressed!'),
                     child: const Text('Remove'),
@@ -50,10 +50,7 @@ class OrderItemDisplay extends StatelessWidget {
   Widget build(BuildContext context) {
     return Text(
       '$quantity $itemType sandwich(es): ${'🥪' * quantity}',
-      style: const TextStyle(
-        fontSize: 20,
-        fontWeight: FontWeight.bold,
-      ),
+      style: const TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
     );
   }
 }
