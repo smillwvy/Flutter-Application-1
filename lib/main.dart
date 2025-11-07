@@ -53,7 +53,7 @@ Widget build(BuildContext context) {
 class OrderScreen extends StatefulWidget {
   final int maxQuantity;
 
-  const OrderScreen({super.key, this.maxQuantity = 10});
+  const OrderScreen({super.key, required this.maxQuantity});
 
   @override
   State<OrderScreen> createState() {
@@ -63,13 +63,10 @@ class OrderScreen extends StatefulWidget {
 
 class _OrderScreenState extends State<OrderScreen> {
   int _quantity = 0;
-
-  final TextEditingController _noteController = TextEditingController();
-  String _lastNote = '';
+  final bool _isFootlong = true;
 
   @override
   void dispose() {
-    _noteController.dispose();
     super.dispose();
   }
 
@@ -77,7 +74,6 @@ class _OrderScreenState extends State<OrderScreen> {
     if (_quantity < widget.maxQuantity) {
       setState(() {
         _quantity++;
-        _lastNote = _noteController.text.trim();
       });
     }
   }
@@ -86,10 +82,10 @@ class _OrderScreenState extends State<OrderScreen> {
     if (_quantity > 0) {
       setState(() {
         _quantity--;
-        _lastNote = _noteController.text.trim();
       });
     }
   }
+
 
   @override
   Widget build(BuildContext context) {
@@ -99,19 +95,18 @@ class _OrderScreenState extends State<OrderScreen> {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: <Widget>[
-            OrderItemDisplay(_quantity, 'Footlong'),
+            OrderItemDisplay(_quantity, _isFootlong ? 'Footlong' : 'Six-inch'),
             Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 SizedBox(
                   child: ElevatedButton(
-                    // Disable Add when at max quantity
                     onPressed: _quantity >= widget.maxQuantity ? null : _increaseQuantity,
                     style: ElevatedButton.styleFrom(
                        backgroundColor: Colors.red,
                        foregroundColor: Colors.white,
-                     ),
-                     child: const Text('Add'),
+                    ),
+                    child: const Text('Add'),
                   ),
                 ),
                 SizedBox(
